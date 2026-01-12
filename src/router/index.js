@@ -1,108 +1,151 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
+// Layouts
 import AuthLayout from '../layouts/AuthLayout.vue'
 import DashboardLayout from '../layouts/DashboardLayout.vue'
 import SidebarLayout from '../components/SidebarLayout.vue'
 
+// Views
 import Login from '../views/Login.vue'
 import Dashboard from '../views/Dashboard.vue'
 import Attendance from '../views/Attendance.vue'
 
-// PDF views
-import PdfDashboard from '../views/pdf/PdfDashboard.vue'
+// PDF Views
 import Flow from '../views/pdf/Flow.vue'
 import MyDocuments from '../views/pdf/MyDocuments.vue'
 import History from '../views/pdf/History.vue'
 import SystemLogs from '../views/pdf/SystemLogs.vue'
 import Profile from '../views/pdf/Profile.vue'
 
+/* ----------------------------------
+   ROUTES
+----------------------------------- */
+const routes = [
+  //  AUTH (PUBLIC)
+  {
+    path: '/login',
+    component: AuthLayout,
+    children: [
+      {
+        path: '',
+        name: 'login',
+        component: Login
+      }
+    ]
+  },
+
+  //  DASHBOARD (PROTECTED)
+  {
+    path: '/dashboard',
+    component: DashboardLayout,
+    meta: { requiresAuth: true },
+    children: [
+      {
+        path: '',
+        name: 'dashboard',
+        component: Dashboard
+      }
+    ]
+  },
+
+  //  APP PAGES (PROTECTED)
+  {
+    path: '/app',
+    component: SidebarLayout,
+    meta: { requiresAuth: true },
+    children: [
+      {
+        path: 'attendance',
+        name: 'attendance',
+        component: Attendance
+      }
+    ]
+  },
+
+  //  PDF MODULE (PROTECTED)
+  {
+    path: '/pdf',
+    component: SidebarLayout,
+    meta: { requiresAuth: true },
+    children: [
+      {
+        path: '',
+        redirect: '/pdf/flow'
+      },
+      {
+        path: 'flow',
+        name: 'pdf-flow',
+        component: Flow
+      },
+      {
+        path: 'my-documents',
+        name: 'pdf-my-documents',
+        component: MyDocuments
+      },
+      {
+        path: 'history',
+        name: 'pdf-history',
+        component: History
+      },
+      {
+        path: 'logs',
+        name: 'pdf-logs',
+        component: SystemLogs
+      },
+      {
+        path: 'profile',
+        name: 'pdf-profile',
+        component: Profile
+      }
+    ]
+  },
+
+  //  DEFAULT
+  {
+    path: '/',
+    redirect: '/login'
+  },
+
+  //  NOT FOUND
+  {
+    path: '/:pathMatch(.*)*',
+    redirect: '/login'
+  }
+]
+
+/* ----------------------------------
+   ROUTER
+----------------------------------- */
 const router = createRouter({
   history: createWebHistory(),
-  routes: [
-    // 🔐 AUTH (no sidebar)
-    {
-      path: '/login',
-      component: AuthLayout,
-      children: [
-        {
-          path: '',
-          name: 'login',
-          component: Login
-        }
-      ]
-    },
+  routes
+})
 
-    // 📊 DASHBOARD (no sidebar)
-    {
-      path: '/dashboard',
-      component: DashboardLayout,
-      children: [
-        {
-          path: '',
-          name: 'dashboard',
-          component: Dashboard
-        }
-      ]
-    },
+/* ----------------------------------
+   AUTH GUARD 
+----------------------------------- */
+const isTokenValid = () => {
+  const token = localStorage.getItem('token')
+  return !!token && token !== '[object Object]'
+}
 
-    // 🧱 APP PAGES (OLD SIDEBAR - KEEP)
-    {
-      path: '/app',
-      component: SidebarLayout,
-      children: [
-        {
-          path: 'attendance',
-          name: 'attendance',
-          component: Attendance
-        }
-        // future app pages go here
-      ]
-    },
+router.beforeEach((to, from, next) => {
+  const requiresAuth = to.matched.some(
+    route => route.meta.requiresAuth
+  )
 
-    // 📄 PDF DOCUMENT (NEW SIDEBAR)
-    {
-  path: '/pdf',
-  component: SidebarLayout,
-  children: [
-    {
-      path: '',
-      redirect: '/pdf/flow'
-    },
-    {
-      path: 'flow',
-      name: 'pdf-flow',
-      component: Flow
-    },
-    {
-      path: 'my-documents',
-      name: 'pdf-my-documents',
-      component: MyDocuments
-    },
-    {
-      path: 'history',
-      name: 'pdf-history',
-      component: History
-    },
-    {
-      path: 'logs',
-      name: 'pdf-logs',
-      component: SystemLogs
-    },
-    {
-      path: 'profile',
-      name: 'pdf-profile',
-      component: Profile
-    }
-  ]
-},
+  if (requiresAuth && !isTokenValid()) {
+    localStorage.removeItem('token')
+    next('/login')
+    return
+  }
 
+  if (to.path === '/login' && isTokenValid()) {
+    next('/dashboard')
+    return
+  }
 
-    // Default
-    {
-      path: '/',
-      redirect: '/login'
-    }
-  ]
+  next()
 })
 
 export default router
