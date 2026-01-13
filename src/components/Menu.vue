@@ -9,11 +9,11 @@
 						</span>
 					</div>
 					<div class="app_card app_01"
-					:class="{ app_active: ['/pdf/flow', '/pdf/documents-add'].includes(route.path) }">
+					:class="{ app_active: ['/pdf/flow', '/pdf/documents-add', '/pdf/documents-edit', '/pdf/documents-detial'].includes(route.path) }">
 						<router-link to="/pdf/flow"></router-link>
 						<span class="apico app1">
 							<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="4 2 16 20"><g fill="none"><path d="M12 8V2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V10h-6a2 2 0 0 1-2-2zm-5 4.25a.75.75 0 1 1 1.5 0a.75.75 0 0 1-1.5 0zm0 3a.75.75 0 1 1 1.5 0a.75.75 0 0 1-1.5 0zm0 3a.75.75 0 1 1 1.5 0a.75.75 0 0 1-1.5 0zm3-6a.75.75 0 0 1 .75-.75h5.5a.75.75 0 0 1 0 1.5h-5.5a.75.75 0 0 1-.75-.75zm0 3a.75.75 0 0 1 .75-.75h5.5a.75.75 0 0 1 0 1.5h-5.5a.75.75 0 0 1-.75-.75zm0 3a.75.75 0 0 1 .75-.75h5.5a.75.75 0 0 1 0 1.5h-5.5a.75.75 0 0 1-.75-.75zM13.5 8V2.5l6 6H14a.5.5 0 0 1-.5-.5z" fill="currentColor"></path></g></svg>
-							<span class="app_txt">លំហូរឯកសារ<span>២០ថ្មី</span></span>
+							<span class="app_txt">លំហូរឯកសារ<span class="d-flex align-items-center">២០ថ្មី</span></span>
 						</span>
 					</div>
 					<div class="app_card app_02"
@@ -21,7 +21,7 @@
             <router-link to="/pdf/my-documents"></router-link>
 						<span class="apico app2">
 							<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="4 2 16 20"><g fill="none"><path d="M12 8V2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V10h-6a2 2 0 0 1-2-2zm-5 4.25a.75.75 0 1 1 1.5 0a.75.75 0 0 1-1.5 0zm0 3a.75.75 0 1 1 1.5 0a.75.75 0 0 1-1.5 0zm0 3a.75.75 0 1 1 1.5 0a.75.75 0 0 1-1.5 0zm3-6a.75.75 0 0 1 .75-.75h5.5a.75.75 0 0 1 0 1.5h-5.5a.75.75 0 0 1-.75-.75zm0 3a.75.75 0 0 1 .75-.75h5.5a.75.75 0 0 1 0 1.5h-5.5a.75.75 0 0 1-.75-.75zm0 3a.75.75 0 0 1 .75-.75h5.5a.75.75 0 0 1 0 1.5h-5.5a.75.75 0 0 1-.75-.75zM13.5 8V2.5l6 6H14a.5.5 0 0 1-.5-.5z" fill="currentColor"></path></g></svg>
-							<span class="app_txt">ឯកសាររបស់ខ្ញុំ<span>១២</span></span>
+							<span class="app_txt">ឯកសាររបស់ខ្ញុំ<span class="d-flex align-items-center">១២</span></span>
 						</span>
 					</div>
 					<div class="app_card app_03"
@@ -29,7 +29,7 @@
             <router-link to="/pdf/history"></router-link>
 						<span class="apico app3">
 							<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="2.05 1.91 19.95 20"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8v4l2 2"></path><path d="M3.05 11a9 9 0 1 1 .5 4m-.5 5v-5h5"></path></g></svg>
-							<span class="app_txt">ប្រវត្តិឯកសារ<span>៥​០</span></span>
+							<span class="app_txt">ប្រវត្តិឯកសារ<span class="d-flex align-items-center">៥​០</span></span>
 						</span>
 					</div>
 					<div class="app_card app_04"

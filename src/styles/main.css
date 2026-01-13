@@ -942,7 +942,7 @@ body:not(.app_snav_open) .app_snav:hover{
   }
   .app_inner{
     padding-top: 90px;
-    height: calc(100vh - 150px);
+    height: calc(100vh - 70px);
     display: flex;
     flex-direction: column;
     justify-content: space-between;

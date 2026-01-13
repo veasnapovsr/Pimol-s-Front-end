@@ -17,6 +17,8 @@ import Flow from '../views/pdf/Flow.vue'
 import FlowDashboard from '../views/pdf/FlowDashboard.vue'
 import MyDocuments from '../views/pdf/MyDocuments.vue'
 import DocumentAdd from '../views/pdf/DocumentAdd.vue'
+import DocumentEdit from '../views/pdf/DocumentEdit.vue'
+import DocumentDetial from '../views/pdf/DocumentDetial.vue'
 import History from '../views/pdf/History.vue'
 import SystemLogs from '../views/pdf/SystemLogs.vue'
 import Profile from '../views/pdf/Profile.vue'
@@ -101,6 +103,16 @@ const routes = [
         path: 'documents-add',
         name: 'pdf-documents-add',
         component: DocumentAdd
+      },      
+      {
+        path: 'documents-edit',
+        name: 'pdf-documents-edit',
+        component: DocumentEdit
+      },      
+      {
+        path: 'documents-detial',
+        name: 'pdf-documents-detial',
+        component: DocumentDetial
       },      
       {
         path: 'history',
