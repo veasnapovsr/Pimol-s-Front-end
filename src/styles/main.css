@@ -10,7 +10,6 @@
 }
 @import "tailwindcss";
 
-@plugin "tailwindcss-animate";
 @import "tw-animate-css";
 
 /* Custom style */
@@ -1038,6 +1037,7 @@ body:not(.app_snav_open) .app_snav:hover{
     overflow: hidden !important;
     text-overflow: ellipsis !important;
     display: -webkit-box !important;
+    line-clamp: 4 !important;
     -webkit-line-clamp: 4 !important;
     -webkit-box-orient: vertical;
     color: var(--ocm-color);
@@ -1870,6 +1870,34 @@ body:not(.ocm_dark_skin) .ocm_bfw .ocm_caw:hover .ocm_icard{
   margin-bottom: 0.5rem;
 }
 
+/*Dashboard hover effect*/
+.column-hover {
+  transition: background 0.1s;
+}
+.column-hover:hover {
+  background: #c3c3c73c !important; /* Tailwind gray-100 */
+}
+/* .dark .column-hover:hover {
+  background: white !important;
+} */
+
+/* PDF user name card background: white in light, grey in dark mode */
+/* .column-hover {
+  background: #d3d0d0;
+}
+.dark .column-hover {
+  background: #ffffff;
+} */
+
+/* .pdf-user-row {
+  background: #fff;
+  border-radius: 8px;
+  padding: 0.5rem 1rem;
+}
+.dark .pdf-user-row {
+  background: #23272f;
+} */
+
 /*--------------------------------------------------------------------------------------------------------*/
 
 /* status */
@@ -2031,6 +2059,7 @@ body:not(.ocm_dark_skin) .ocm_bfw .ocm_caw:hover .ocm_icard{
   display: -webkit-box;
   text-overflow: ellipsis;
   -webkit-box-orient: vertical;
+  line-clamp: 2;
   -webkit-line-clamp: 2;
   word-break: break-word;
   overflow-wrap: break-word;
@@ -2283,7 +2312,10 @@ body:not(.ocm_dark_skin) .ocm_bfw .ocm_caw:hover .ocm_icard{
     }
   }
 
+
+
   .appinfo_inner{
+
     max-width: 900px;
     margin: 0 auto;
     text-align: center;
@@ -2343,3 +2375,7 @@ body:not(.ocm_dark_skin) .ocm_bfw .ocm_caw:hover .ocm_icard{
 
   --border: 214.3 31.8% 91.4%;
 }
+
+
+
+
