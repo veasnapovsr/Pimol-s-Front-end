@@ -25,7 +25,7 @@
 
             <!-- ===== LEFT : PDF VIEWER ===== -->
             <div class="col-span-8 h-full overflow-hidden rounded-lg border">
-              <PdfViewer src="/docs/reportMenu.pdf" />
+              <PdfViewer src="/public/docs/reportMenu.pdf" />
             </div>
 
             <!-- ===== RIGHT : WORKFLOW / TIMELINE ===== -->

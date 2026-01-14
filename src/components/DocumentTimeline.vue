@@ -119,7 +119,7 @@ import { ref, computed } from 'vue'
   0  = pending (yellow)
  -1  = rejected (red)
 */
-const stepsStatus = ref([1, 1, 1, 1]) // 👈 change this to test
+const stepsStatus = ref([1, 1, -1, 1]) // 👈 change this to test
 
 /* ================= DATA ================= */
 const comment = ref('')
