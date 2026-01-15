@@ -1,7 +1,8 @@
 <script setup>
-	import Header from '@/components/Header.vue'
-	import Aside from '@/components/Aside.vue'
-	import Footer from '@/components/Footer.vue'
+import Header from '@/components/Header.vue'
+import Aside from '@/components/Aside.vue'
+import Footer from '@/components/Footer.vue'
+import { documents } from '@/data/documents.js'
 </script>
 
 <template>
@@ -74,196 +75,66 @@
 					</div>
 							</div>
 						</div>
-						<!-- Titles -->
-						<div style="display:grid; grid-template-columns:1fr 1fr; gap:1.5rem; margin-bottom:1rem;">
-							<span class="jl_tbl_c bold dashboard-title-center" style="font-size:18px;">
-								លំហូរឯកសារថ្មី
-							</span>
-							<span class="jl_tbl_c bold dashboard-title-center" style="font-size:18px;">
-								លំហូរឯកសារមិនទាន់អនុម័ត
-							</span>
+						<div style="display:grid; grid-template-columns:1fr 1fr; gap:1.5rem; align-items:start; margin-bottom:0.5rem;">
+							<span class="bold dashboard-title-center" style="font-size:18px;">លំហូរឯកសារថ្មី</span>
+							<span class="bold dashboard-title-center" style="font-size:18px;">លំហូរឯកសារមិនទាន់អនុម័ត</span>
 						</div>
-						
-						<div class="ocm_dashboard_splits"
-							 style="display:grid; grid-template-columns:1fr 1fr; gap:1.5rem;">
-						  <!--Column 1 -->
-						  <div class="d-flex flex-column column-hover" style="gap:1rem; border:2px solid #e5e7eb; border-radius:12px; padding:1.5rem;">
-						<!-- The 2 Columns dashboards-->
-						
-								<!-- Card 1 -->
-								<div class="ocm_caw">
-									<div class="ocm_card_body">
-										<div class="d-flex flex-column align-items-start" style="gap:0.5rem;">
-											<div class="ocm_docf d-flex align-items-center justify-content-start pdf-user-row" style="gap:0.75rem;">
-												<svg xmlns="http://www.w3.org/2000/svg" viewBox="4 2 16 20" width="32" height="32">
-													<path fill="currentColor" d="M12 8V2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V10h-6a2 2 0 0 1-2-2z"/>
-												</svg>
-												<span>PDF</span>
-												<span class="jl_tbl_c bold" style="font-size:15px; margin-left:0.5rem;">លោកជំទាវ អ៊ុង ច័ន្ទសោភា</span>
-											</div>
-										</div>
-						
-										<span>3 MB</span>
-						
-										<div class="jl_tbl_c" style="margin-top:0.5rem;">
-											<span class="tb_n1 link bold ellip-2">
-												អនុម័តយល់ព្រមលើកិច្ចព្រមព្រៀងបន្ថែមទៅលើសន្ធិសញ្ញាស្តីពីតំបន់អាស៊ី-អាគ្នេយ៍គ្មានអាវុធ នុយក្លេអ៊ែរ...
-											</span>
-											<span class="tb_n1 fs-95">លិខិតលេខ: នស/រកម / ០០៣២</span><br>
-											<span class="tb_n1 fs-95">កាលបរិច្ឆេទ: ០៤-មេសា-២០២៤</span>
-										</div>
-									</div>
-								</div>
-						
-								<!-- Card 2 -->
-								<div class="ocm_caw">
-									<div class="ocm_card_body">
-										<div class="d-flex flex-column align-items-start" style="gap:0.5rem;">
-											<div class="ocm_docf d-flex align-items-center justify-content-start pdf-user-row" style="gap:0.75rem;">
-												<svg xmlns="http://www.w3.org/2000/svg" viewBox="4 2 16 20" width="32" height="32">
-													<path fill="currentColor" d="M12 8V2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V10h-6a2 2 0 0 1-2-2z"/>
-												</svg>
-												<span>PDF</span>
-												<span class="jl_tbl_c bold" style="font-size:15px; margin-left:0.5rem;">លោកជំទាវ អ៊ុង ច័ន្ទសោភា</span>
-											</div>
-										</div>
-						
-										<span>1 MB</span>
-						
-										<div class="jl_tbl_c" style="margin-top:0.5rem;">
-											<span class="tb_n1 link bold ellip-2">
-												អនុម័តយល់ព្រមលើកិច្ចព្រមព្រៀងបន្ថែមទៅលើសន្ធិសញ្ញាស្តីពីតំបន់អាស៊ី-អាគ្នេយ៍គ្មានអាវុធ នុយក្លេអ៊ែរ...
-											</span>
-											<span class="tb_n1 fs-95">លិខិតលេខ: នស/រកម / ០០៣២</span><br>
-											<span class="tb_n1 fs-95">កាលបរិច្ឆេទ: ០៤-មេសា-២០២៤</span>
-										</div>
-									</div>
-								</div>
-
-								
-								<!-- Card 2 -->
-								<div class="ocm_caw">
-									<div class="ocm_card_body">
-										<div class="d-flex flex-column align-items-start" style="gap:0.5rem;">
-											<div class="ocm_docf d-flex align-items-center justify-content-start pdf-user-row" style="gap:0.75rem;">
-												<svg xmlns="http://www.w3.org/2000/svg" viewBox="4 2 16 20" width="32" height="32">
-													<path fill="currentColor" d="M12 8V2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V10h-6a2 2 0 0 1-2-2z"/>
-												</svg>
-												<span>PDF</span>
-												<span class="jl_tbl_c bold" style="font-size:15px; margin-left:0.5rem;">លោកជំទាវ អ៊ុង ច័ន្ទសោភា</span>
-											</div>
-										</div>
-						
-										<span>2 MB</span>
-						
-										<div class="jl_tbl_c" style="margin-top:0.5rem;">
-											<span class="tb_n1 link bold ellip-2">
-												អនុម័តយល់ព្រមលើកិច្ចព្រមព្រៀងបន្ថែមទៅលើសន្ធិសញ្ញាស្តីពីតំបន់អាស៊ី-អាគ្នេយ៍គ្មានអាវុធ នុយក្លេអ៊ែរ...
-											</span>
-											<span class="tb_n1 fs-95">លិខិតលេខ: នស/រកម / ០០៣២</span><br>
-											<span class="tb_n1 fs-95">កាលបរិច្ឆេទ: ០៤-មេសា-២០២៤</span>
-										</div>
-									</div>
-								</div>
-						
-							</div>
-						
-							<!--Column 3 -->
+						<div class="ocm_dashboard_splits" style="display:grid; grid-template-columns:1fr 1fr; gap:1.5rem;">
+							<!--Column 1: លំហូរឯកសារថ្មី-->
 							<div class="d-flex flex-column column-hover" style="gap:1rem; border:2px solid #e5e7eb; border-radius:12px; padding:1.5rem;">
-						
-								<!-- Card 1 -->
-								<div class="ocm_caw">
+								<div v-for="doc in documents.filter(d => d.status === 'pending')" :key="doc.id" class="ocm_caw">
 									<div class="ocm_card_body">
 										<div class="d-flex flex-column align-items-start" style="gap:0.5rem;">
 											<div class="ocm_docf d-flex align-items-center justify-content-start pdf-user-row" style="gap:0.75rem;">
 												<svg xmlns="http://www.w3.org/2000/svg" viewBox="4 2 16 20" width="32" height="32">
 													<path fill="currentColor" d="M12 8V2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V10h-6a2 2 0 0 1-2-2z"/>
 												</svg>
-												<span>PDF</span>
-												<span class="jl_tbl_c bold" style="font-size:15px; margin-left:0.5rem;">ឧត្តម ម៉ក់ រ៉េនីតា</span>
+												<span>{{ doc.type }}</span>
+												<span class="jl_tbl_c bold" style="font-size:15px; margin-left:0.5rem;">{{ doc.creator }}</span>
 											</div>
 										</div>
-						
-										<span>3 MB</span>
-						
+										<span>{{ doc.size }}</span>
 										<div class="jl_tbl_c" style="margin-top:0.5rem;">
-											<span class="tb_n1 link bold ellip-2">
-												អនុម័តយល់ព្រមលើកិច្ចព្រមព្រៀងបន្ថែមទៅលើសន្ធិសញ្ញាស្តីពីតំបន់អាស៊ី-អាគ្នេយ៍គ្មានអាវុធ នុយក្លេអ៊ែរ...
-											</span>
-											<span class="tb_n1 fs-95">លិខិតលេខ: នស/រកម / ០០៣២</span><br>
-											<span class="tb_n1 fs-95">កាលបរិច្ឆេទ: ០៤-មេសា-២០២៤</span>
+											<span class="tb_n1 link bold ellip-2">{{ doc.title }}</span>
+											<span class="tb_n1 fs-95">លិខិតលេខ: {{ doc.code }}</span><br>
+											<span class="tb_n1 fs-95">កាលបរិច្ឆេទ: {{ doc.date }}</span>
 										</div>
 									</div>
 								</div>
-						
-								<!-- Card 2 -->
-								<div class="ocm_caw">
-									<div class="ocm_card_body">
-										<div class="d-flex flex-column align-items-start" style="gap:0.5rem;">
-											<div class="ocm_docf d-flex align-items-center justify-content-start pdf-user-row" style="gap:0.75rem;">
-												<svg xmlns="http://www.w3.org/2000/svg" viewBox="4 2 16 20" width="32" height="32">
-													<path fill="currentColor" d="M12 8V2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V10h-6a2 2 0 0 1-2-2z"/>
-												</svg>
-												<span>PDF</span>
-												<span class="jl_tbl_c bold" style="font-size:15px; margin-left:0.5rem;">លោកជំទាវ អ៊ុង ច័ន្ទសោភា</span>
-											</div>
-										</div>
-						
-										<span>4 MB</span>
-						
-										<div class="jl_tbl_c" style="margin-top:0.5rem;">
-											<span class="tb_n1 link bold ellip-2">
-												អនុម័តយល់ព្រមលើកិច្ចព្រមព្រៀងបន្ថែមទៅលើសន្ធិសញ្ញាស្តីពីតំបន់អាស៊ី-អាគ្នេយ៍គ្មានអាវុធ នុយក្លេអ៊ែរ...
-											</span>
-											<span class="tb_n1 fs-95">លិខិតលេខ: នស/រកម / ០០៣២</span><br>
-											<span class="tb_n1 fs-95">កាលបរិច្ឆេទ: ០៤-មេសា-២០២៤</span>
-										</div>
-									</div>
-								</div>
-
-								
-								<!-- Card 3 -->
-								<div class="ocm_caw">
-									<div class="ocm_card_body">
-										<div class="d-flex flex-column align-items-start" style="gap:0.5rem;">
-											<div class="ocm_docf d-flex align-items-center justify-content-start pdf-user-row" style="gap:0.75rem;">
-												<svg xmlns="http://www.w3.org/2000/svg" viewBox="4 2 16 20" width="32" height="32">
-													<path fill="currentColor" d="M12 8V2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V10h-6a2 2 0 0 1-2-2z"/>
-												</svg>
-												<span>PDF</span>
-												<span class="jl_tbl_c bold" style="font-size:15px; margin-left:0.5rem;">លោកជំទាវ អ៊ុង ច័ន្ទសោភា</span>
-											</div>
-										</div>
-						
-										<span>4 MB</span>
-						
-										<div class="jl_tbl_c" style="margin-top:0.5rem;">
-											<span class="tb_n1 link bold ellip-2">
-												អនុម័តយល់ព្រមលើកិច្ចព្រមព្រៀងបន្ថែមទៅលើសន្ធិសញ្ញាស្តីពីតំបន់អាស៊ី-អាគ្នេយ៍គ្មានអាវុធ នុយក្លេអ៊ែរ...
-											</span>
-											<span class="tb_n1 fs-95">លិខិតលេខ: នស/រកម / ០០៣២</span><br>
-											<span class="tb_n1 fs-95">កាលបរិច្ឆេទ: ០៤-មេសា-២០២៤</span>
-										</div>
-									</div>
-								</div>
-						
 							</div>
-						
+							<!--Column 2: លំហូរឯកសារអនុម័ត-->
+							<div class="d-flex flex-column column-hover" style="gap:1rem; border:2px solid #e5e7eb; border-radius:12px; padding:1.5rem;">
+								<div v-for="doc in documents.filter(d => d.status === 'approved')" :key="doc.id" class="ocm_caw">
+									<div class="ocm_card_body">
+										<div class="d-flex flex-column align-items-start" style="gap:0.5rem;">
+											<div class="ocm_docf d-flex align-items-center justify-content-start pdf-user-row" style="gap:0.75rem;">
+												<svg xmlns="http://www.w3.org/2000/svg" viewBox="4 2 16 20" width="32" height="32">
+													<path fill="currentColor" d="M12 8V2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V10h-6a2 2 0 0 1-2-2z"/>
+												</svg>
+												<span>{{ doc.type }}</span>
+												<span class="jl_tbl_c bold" style="font-size:15px; margin-left:0.5rem;">{{ doc.creator }}</span>
+											</div>
+										</div>
+										<span>{{ doc.size }}</span>
+										<div class="jl_tbl_c" style="margin-top:0.5rem;">
+											<span class="tb_n1 link bold ellip-2">{{ doc.title }}</span>
+											<span class="tb_n1 fs-95">លិខិតលេខ: {{ doc.code }}</span><br>
+											<span class="tb_n1 fs-95">កាលបរិច្ឆេទ: {{ doc.date }}</span>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						</div>
+						</div>
 						</div>
 						
-
-
-						</div>
-
-						
-								
-						
+						 <!--Chart-->
 							
-						</div>
 						<div class="ocm_chart_card">
 							<img src="@/assets/chart.jpg" alt="Chart" />
 						</div>
-					</div>
+					
 
 					<Footer />
 
