@@ -103,7 +103,7 @@ export default {
 
       try {
         const response = await axios.post(
-          "http://10.11.11.68:8001/api/authcenter/authentication/login",
+          "https://hrapi.ocm.gov.kh/api/authcenter/authentication/login",
           {
             email: email.value,
             password: password.value
