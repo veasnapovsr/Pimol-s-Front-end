@@ -1997,9 +1997,9 @@ body:not(.ocm_dark_skin) .ocm_bfw .ocm_caw:hover .ocm_icard{
   background-color: #a4e7d2;
 }
 .ocm_status.acdecl{
-  background-color: #ffb5b8;
-  /* background: #ff4c51;
-  color: #fff; */
+  /* background-color: #ffb5b8; */
+  background-color: #ff686e;
+  color: #fff;
 }
 .ocm_pover_wr{
   position: relative;
