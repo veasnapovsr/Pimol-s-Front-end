@@ -1857,7 +1857,7 @@ table.wp-list-table .type-ocmdb_data .column-title .row-actions .trash a:before{
 .card_tt{
   font-size: 20px;
   width: calc(100% + 30px);
-  padding: 10px 0px 10px 15px;
+  padding: 10px 15px;
   margin: -15px 0px 15px -15px;
   border-bottom: 1px solid var(--ocm-app-border);
 }
@@ -1938,7 +1938,7 @@ body:not(.ocm_dark_skin) .ocm_bfw .ocm_caw:hover .ocm_icard{
 }
 .ocm_bfw .ocm_caw.status_draft .ocm_icard, .ocm_bfw .ocm_caw.noneh.status_draft:hover .ocm_icard{
   background-color: #e6e6e6;
-  color: #726f6f;
+  color: #000000;
 }
 .ocm_bfw .ocm_card_value{
   font-size: 23px;
@@ -2177,15 +2177,19 @@ body:not(.ocm_dark_skin) .ocm_bfw .ocm_caw:hover .ocm_icard{
   font-weight: 400;
 }
 .noti_head .noti_clear, .ocm_lbl{
-  background-color: #ffe27a;
-  color: #000;
+  background-color: #e4ebfe;
+  color: #4755ff;
   height: 22px;
   cursor: pointer;
   display: flex;
   align-items: center;
   padding: 0px 10px;
   border-radius: 4px;
-  font-size: 80%;
+  font-size: 70%;
+}
+.noti_head .noti_clear{
+  color: #000000;
+  background-color: #e6e6e6;
 }
 .noti_list > li{
   position: relative;

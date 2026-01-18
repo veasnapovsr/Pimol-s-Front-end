@@ -86,7 +86,7 @@
 						<div class="ocmopt-col cols2 mb-30">
 							<div class="ocm_card ocm_doc_fr ocm_dcnew">
 								<div class="ocm_card_body">
-									<h2 class="h card_tt t-lspace">លំហូរឯកសារថ្មី (២០)</h2>
+									<h2 class="h card_tt t-lspace w-full flex justify-between items-center"><span>លំហូរឯកសារថ្មី (២០)</span> <span class="ocm_lbl">បង្ហាញទាំងអស់</span></h2>
 									<span class="jl_tbl_w cursor-pointer" @click="goToDetail">
 								<span class="ocm_docfw">
 									<span class="ocm_docf d-flex flex-column align-items-center">
@@ -144,7 +144,7 @@
 
 							<div class="ocm_card ocm_doc_fr ocm_dcwait">
 								<div class="ocm_card_body">
-									<h2 class="h card_tt t-lspace">លំហូរឯកសារមិនទាន់អនុម័ត (១១)</h2>
+									<h2 class="h card_tt t-lspace w-full flex justify-between items-center"><span>លំហូរឯកសារមិនទាន់អនុម័ត (១១)</span> <span class="ocm_lbl">បង្ហាញទាំងអស់</span></h2>
 									<span class="jl_tbl_w cursor-pointer" @click="goToDetail">
 								<span class="ocm_docfw">
 									<span class="ocm_docf d-flex flex-column align-items-center">
