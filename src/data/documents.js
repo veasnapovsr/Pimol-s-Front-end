@@ -21,7 +21,7 @@ export const documents = [
     size: '2 MB',
     status: 'pending',
     sentAt: '2024-04-05T14:30:00',
-    sentTo: 'នាយកដ្ឋានរដ្ឋបាល'
+    sentTo: 'នាយកដ្ឋានហិរញ្ញវត្ថុ'
   },
   {
     id: 3,
@@ -81,7 +81,7 @@ export const documents = [
     size: '4 MB',
     status: 'approved',
     sentAt: '2024-04-07T09:15:00',
-    sentTo: 'នាយកដ្ឋានរដ្ឋបាល'
+    sentTo: 'នាយកដ្ឋានរដ្ឋបាល4'
   },
   {
     id: 8,
@@ -93,7 +93,7 @@ export const documents = [
     size: '4 MB',
     status: 'pending',
     sentAt: '2024-04-07T09:15:00',
-    sentTo: 'នាយកដ្ឋានរដ្ឋបាល'
+    sentTo: 'នាយកដ្ឋានរដ្ឋបាល3'
   },
   {
     id: 9,
@@ -105,7 +105,7 @@ export const documents = [
     size: '4 MB',
     status: 'approved',
     sentAt: '2024-04-07T09:15:00',
-    sentTo: 'នាយកដ្ឋានរដ្ឋបាល'
+    sentTo: 'នាយកដ្ឋានរដ្ឋបាល2'
   },
   {
     id: 10,
