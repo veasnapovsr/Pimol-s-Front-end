@@ -106,15 +106,26 @@
       </div>
 
       <div>
+        <p class="font-khmer font-bold">តួនាទី</p>
+       <p v-if="!isEditing" 
+       class="font-khmer">{{ user.position.name }}</p>
+<input
+  v-else
+  v-model="user.position.name"
+       type="text"
+  class="border rounded px-4 py-3 w-full text-lg"
+/>
+</div>
+      <div>
         <p class="font-khmer font-bold">ត្រកូល (អង់គ្លេស)</p>
         <p v-if="!isEditing" class="font-khmer">{{ user.people.enlastname }}</p>
         <input
           v-else
           v-model="user.people.enlastname"
-           type="text"
+          type="text"
           class="border rounded px-4 py-3 w-full text-lg"
-        />
-      </div>
+          />
+        </div>
 
       <div>
         <p class="font-khmer font-bold">ឈ្មោះ (អង់គ្លេស)</p>
@@ -127,18 +138,7 @@
         />
       </div>
 
-      <div>
-        <p class="font-khmer font-bold">តួនាទី</p>
-       <p v-if="!isEditing" 
-       class="font-khmer">{{ user.position.name }}</p>
-<input
-  v-else
-  v-model="user.position.name"
-       type="text"
-  class="border rounded px-4 py-3 w-full text-lg"
-/>
 
-      </div>
       <!-- Row 2 -->
       <div>
         <p class="font-khmer font-bold">អ៊ីមែល</p>
