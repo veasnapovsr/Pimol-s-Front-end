@@ -56,7 +56,7 @@
 import { useRouter } from "vue-router"
 import { Bell, User, LogOut } from "lucide-vue-next"
 
-const router = useRouter() // ✅ THIS WAS MISSING
+const router = useRouter() //
 
 const logout = () => {
   // 1️⃣ Clear auth data
