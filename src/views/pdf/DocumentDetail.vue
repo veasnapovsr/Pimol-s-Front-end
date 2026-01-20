@@ -33,7 +33,7 @@
 
             <!-- RIGHT : WORKFLOW / TIMELINE -->
             <div
-              class="w-[360px] overflow-y-auto doc_sidebar"
+              class="w-90 overflow-y-auto doc_sidebar"
             >
               <DocumentTimeline />
             </div>

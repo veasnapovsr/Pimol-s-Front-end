@@ -27,7 +27,7 @@ import DocumentStatusFilter from '@/components/flow/DocumentStatusFilter.vue'
 import DocumentSentToFilter from '@/components/flow/DocumentSentToFilter.vue'
 
 /* =======================
-   DATA
+   DATAT
 ======================= */
 import { flowStats } from '@/data/Flowstatuscheck'
 import { documents } from '@/data/documents'
@@ -65,7 +65,7 @@ const onSort = (key) => {
    SENT TO OPTIONS (AUTO)
 ======================= */
 const sentToOptions = computed(() => [
-  { value: 'all', label: 'ទាំងអស់' },
+  { value: '', label: 'ទាំងអស់' },
   ...Array.from(
     new Set(
       documents
