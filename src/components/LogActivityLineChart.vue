@@ -1,5 +1,4 @@
 <script setup>
-import { ref, onMounted } from 'vue';
 import {
   Chart as ChartJS,
   TimeScale,
@@ -11,45 +10,59 @@ import {
 } from 'chart.js';
 import { Line } from 'vue-chartjs';
 import 'chartjs-adapter-date-fns';
-import { enUS } from 'date-fns/locale';
+import { km } from 'date-fns/locale';
 
 ChartJS.register(TimeScale, LinearScale, PointElement, LineElement, Tooltip, Legend);
 
-// --- DUMMY DATA FOR TODAY ---
-// Each object represents one specific event (one dot)
-const loginEvents = [
-  { x: new Date().setHours(8, 30), y: 1, user: 'Sarah Connor', action: 'Logged in' },
-  { x: new Date().setHours(10, 15), y: 2, user: 'John Doe', action: 'Logged in' },
-  { x: new Date().setHours(13, 0), y: 1.5, user: 'Kyle Reese', action: 'Logged in' },
-  { x: new Date().setHours(16, 45), y: 3, user: 'Ellen Ripley', action: 'Logged in' },
+const todayKhmer = new Intl.DateTimeFormat('km-KH', { 
+  weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' 
+}).format(new Date());
+
+// ទិន្នន័យសកម្មភាពម្នាក់ៗ (ម្នាក់ ចំណុចមួយ)
+// y តំណាងឱ្យកម្ពស់នៃបន្ទាត់ដើម្បីឱ្យមើលទៅឃើញឡើងចុះ (Pointer style)
+const loginData = [
+  { x: new Date().setHours(8, 10), y: 2, user: 'សុខ សាន', action: 'បានចូល Website' },
+  { x: new Date().setHours(8, 30), y: 5, user: 'ចាន់ ណា', action: 'បានចូល Website' },
+  { x: new Date().setHours(9, 15), y: 3, user: 'មករា វុទ្ធី', action: 'បានចូល Website' },
+  { x: new Date().setHours(10, 0), y: 7, user: 'លីដា ហេង', action: 'បានចូល Website' },
+  { x: new Date().setHours(10, 45), y: 4, user: 'ស៊ីណា រ៉េត', action: 'បានចូល Website' },
+  { x: new Date().setHours(12, 10), y: 2, user: 'បូរ៉ា វី', action: 'បានចូល Website' },
+  { x: new Date().setHours(13, 30), y: 6, user: 'ស្រីមុំ ពេជ្រ', action: 'បានចូល Website' },
+  { x: new Date().setHours(15, 20), y: 8, user: 'ដេវីត ឡុង', action: 'បានចូល Website' },
+  { x: new Date().setHours(16, 40), y: 3, user: 'សីហា វ៉ាន់', action: 'បានចូល Website' },
 ];
 
-const viewEvents = [
-  { x: new Date().setHours(9, 0), y: 0.5, user: 'Tony Stark', action: 'Viewed Document' },
-  { x: new Date().setHours(11, 30), y: 2.5, user: 'Steve Rogers', action: 'Viewed Document' },
-  { x: new Date().setHours(14, 20), y: 1, user: 'Bruce Banner', action: 'Viewed Document' },
-  { x: new Date().setHours(17, 10), y: 2, user: 'Thor Odinson', action: 'Viewed Document' },
+const viewData = [
+  { x: new Date().setHours(8, 45), y: 1, user: 'ដានី ទេវី', action: 'បានចូលមើលឯកសារ' },
+  { x: new Date().setHours(9, 30), y: 4, user: 'សុវណ្ណ រិទ្ធ', action: 'បានចូលមើលឯកសារ' },
+  { x: new Date().setHours(11, 20), y: 6, user: 'គឹមហ៊ាង', action: 'បានចូលមើលឯកសារ' },
+  { x: new Date().setHours(12, 45), y: 3, user: 'ពិសិដ្ឋ ម៉ៅ', action: 'បានចូលមើលឯកសារ' },
+  { x: new Date().setHours(14, 15), y: 7, user: 'រតនា ម៉ារី', action: 'បានចូលមើលឯកសារ' },
+  { x: new Date().setHours(15, 50), y: 2, user: 'ចិន្តា ប៊ុន', action: 'បានចូលមើលឯកសារ' },
+  { x: new Date().setHours(17, 10), y: 5, user: 'វិច្ឆិកា នីត', action: 'បានចូលមើលឯកសារ' },
 ];
 
 const chartData = {
   datasets: [
     {
-      label: 'Logins',
-      data: loginEvents,
-      borderColor: '#f472b6',
-      backgroundColor: '#f472b6',
-      tension: 0.4,
+      label: 'ចូល Website',
+      data: loginData,
+      borderColor: '#ef4444', // ពណ៌ក្រហម (Red-500)
+      backgroundColor: '#ef4444',
+      tension: 0, 
       pointRadius: 6,
-      pointHoverRadius: 8,
+      pointHoverRadius: 9,
+      borderWidth: 2,
     },
     {
-      label: 'Views',
-      data: viewEvents,
-      borderColor: '#60a5fa',
-      backgroundColor: '#60a5fa',
-      tension: 0.4,
+      label: 'ចូលមើលឯកសារ',
+      data: viewData,
+      borderColor: '#3b82f6', // ពណ៌ខៀវ (Blue-500)
+      backgroundColor: '#3b82f6',
+      tension: 0,
       pointRadius: 6,
-      pointHoverRadius: 8,
+      pointHoverRadius: 9,
+      borderWidth: 2,
     }
   ]
 };
@@ -60,28 +73,31 @@ const chartOptions = {
   scales: {
     x: {
       type: 'time',
-      time: { unit: 'hour' },
-      adapters: { date: { locale: enUS } },
-      grid: { display: false },
-      title: { display: true, text: 'Time Today', font: { size: 10 } }
+      time: { unit: 'hour', displayFormats: { hour: 'HH:mm' } },
+      adapters: { date: { locale: km } },
+      grid: { display: true, color: '#f3f4f6' },
+      ticks: { font: { family: 'Kantumruy Pro', size: 11 } }
     },
     y: {
       beginAtZero: true,
-      display: false, // Hiding Y axis as we care about the timeline sequence
+      grid: { color: '#f3f4f6' },
+      ticks: { display: false } 
     }
   },
   plugins: {
-    legend: { position: 'top', align: 'end' },
+    legend: {
+      position: 'top',
+      align: 'end',
+      labels: { font: { family: 'Kantumruy Pro', size: 12 }, usePointStyle: true }
+    },
     tooltip: {
-      enabled: false, // We disable standard tooltip to use our custom HTML one
+      enabled: false,
       external: function(context) {
-        // Custom Tooltip element logic
-        let tooltipEl = document.getElementById('chartjs-tooltip');
-
+        let tooltipEl = document.getElementById('chartjs-tooltip-red');
         if (!tooltipEl) {
           tooltipEl = document.createElement('div');
-          tooltipEl.id = 'chartjs-tooltip';
-          tooltipEl.className = 'absolute bg-gray-900 text-white p-3 rounded-lg shadow-xl pointer-events-none transition-opacity duration-200 text-xs z-50';
+          tooltipEl.id = 'chartjs-tooltip-red';
+          tooltipEl.className = 'absolute bg-gray-900 text-white p-3 rounded-xl shadow-2xl pointer-events-none transition-opacity duration-200 z-50 border border-gray-700';
           document.body.appendChild(tooltipEl);
         }
 
@@ -93,16 +109,18 @@ const chartOptions = {
 
         if (tooltipModel.body) {
           const dataPoint = tooltipModel.dataPoints[0].raw;
+          const color = tooltipModel.dataPoints[0].dataset.borderColor;
+
           tooltipEl.innerHTML = `
-            <div class="flex items-center gap-3">
-              <div class="w-8 h-8 rounded-full bg-gray-600 flex items-center justify-center font-bold">
+            <div class="flex items-center gap-3 font-khmer min-w-[160px]">
+              <div class="w-10 h-10 rounded-full flex items-center justify-center text-lg font-bold border-2" style="background-color: ${color}; border-color: white;">
                 ${dataPoint.user.charAt(0)}
               </div>
-              <div>
-                <div class="font-bold text-sm">${dataPoint.user}</div>
-                <div class="text-gray-400">${dataPoint.action}</div>
-                <div class="text-[10px] mt-1 text-pink-400">
-                  ${new Date(dataPoint.x).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+              <div style="font-family: 'Kantumruy Pro', sans-serif">
+                <div class="font-bold text-sm" style="color: ${color}">${dataPoint.user}</div>
+                <div class="text-xs text-gray-300">${dataPoint.action}</div>
+                <div class="text-[10px] mt-1 text-gray-500">
+                  ម៉ោង ${new Date(dataPoint.x).toLocaleTimeString('km-KH', { hour: '2-digit', minute: '2-digit' })}
                 </div>
               </div>
             </div>
@@ -112,7 +130,7 @@ const chartOptions = {
         const position = context.chart.canvas.getBoundingClientRect();
         tooltipEl.style.opacity = 1;
         tooltipEl.style.left = position.left + window.pageXOffset + tooltipModel.caretX + 'px';
-        tooltipEl.style.top = position.top + window.pageYOffset + tooltipModel.caretY - 80 + 'px';
+        tooltipEl.style.top = position.top + window.pageYOffset + tooltipModel.caretY - 100 + 'px';
       }
     }
   }
@@ -120,33 +138,33 @@ const chartOptions = {
 </script>
 
 <template>
-  <div class="bg-white border border-gray-200 rounded-xl p-6 shadow-sm">
+  <div class="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm font-khmer">
     <!-- Header -->
-    <div class="flex justify-between items-start mb-6">
+    <div class="flex flex-col md:flex-row justify-between items-start mb-6 gap-4">
       <div>
-        <h3 class="text-base font-bold text-gray-800">Activity Timeline</h3>
-        <p class="text-xs text-gray-500">Real-time user actions for today</p>
+        <h3 class="text-xl font-bold text-gray-900" style="font-family: 'Kantumruy Pro'">តារាងសកម្មភាព</h3>
+        <p class="text-sm text-gray-500 mt-1">{{ todayKhmer }}</p>
       </div>
-      <div class="flex gap-4 text-xs font-medium">
-        <div class="flex items-center gap-1.5">
-          <span class="w-2 h-2 rounded-full bg-pink-400"></span> Logins
-        </div>
-        <div class="flex items-center gap-1.5">
-          <span class="w-2 h-2 rounded-full bg-blue-400"></span> Views
-        </div>
-      </div>
+      
+      
     </div>
 
-    <!-- Chart -->
-    <div class="w-full h-72 relative">
+    <!-- Chart Body -->
+    <div class="w-full h-80 relative bg-slate-50/50 rounded-xl border border-slate-100 p-4">
       <Line :data="chartData" :options="chartOptions" />
     </div>
   </div>
 </template>
 
 <style>
-/* Ensure the tooltip doesn't cause scrollbars */
-#chartjs-tooltip {
-  min-width: 150px;
+@import url('https://fonts.googleapis.com/css2?family=Kantumruy+Pro:wght@400;600;700&display=swap');
+
+.font-khmer {
+  font-family: 'Kantumruy Pro', sans-serif;
+}
+
+#chartjs-tooltip-red {
+  transform: translate(-50%, -100%);
+  margin-top: -10px;
 }
 </style>
