@@ -76,7 +76,6 @@ const chartOptions = {
       time: { unit: 'hour', displayFormats: { hour: 'HH:mm' } },
       adapters: { date: { locale: km } },
       grid: { display: true, color: '#f3f4f6' },
-      ticks: { font: { family: 'Kantumruy Pro', size: 11 } }
     },
     y: {
       beginAtZero: true,
@@ -87,8 +86,8 @@ const chartOptions = {
   plugins: {
     legend: {
       position: 'top',
-      align: 'end',
-      labels: { font: { family: 'Kantumruy Pro', size: 12 }, usePointStyle: true }
+      align: 'start',
+      labels: { usePointStyle: true }
     },
     tooltip: {
       enabled: false,
