@@ -77,6 +77,7 @@ import { ref, onMounted } from "vue"
 import axios from "axios"
 import { useRouter } from "vue-router"
 import { toast } from "vue-sonner"
+import auth from './../api/auth'
 
 export default {
   setup() {
@@ -114,28 +115,48 @@ export default {
       }
 
       try {
-        const response = await axios.post(
-          "https://hrapi.ocm.gov.kh/api/authcenter/authentication/login",
+
+        /**
+         * Start
+         */
+        auth.login( 
+          "https://hrapi.ocm.gov.kh/api/authcenter/authentication/login" , 
           {
             email: email.value,
             password: password.value
           }
-        )
+        ).then( res => {
+          
+          const { token, record, upload_max_filesize } = res.data
 
-        const { token, record, upload_max_filesize } = response.data
+          localStorage.setItem("token", JSON.stringify(token))
+          localStorage.setItem("user", JSON.stringify(record))
+          localStorage.setItem("upload_max_filesize", upload_max_filesize)
+          toast.success("ចូលប្រព័ន្ធបានជោគជ័យ")
+          
+          const userId = record?.id ? String(record.id) : ""
 
-        localStorage.setItem("token", JSON.stringify(token))
-        localStorage.setItem("user", JSON.stringify(record))
-        localStorage.setItem("upload_max_filesize", upload_max_filesize)
+          if (userId === "2901") {
+            router.push("/pdf/flow-dash2")
+          } else {
+            router.push("/dashboard")
+          }
+        })
 
-        toast.success("ចូលប្រព័ន្ធបានជោគជ័យ")
-        const userId = record?.id ? String(record.id) : ""
+        // const response = await axios.post(
+        //   "https://hrapi.ocm.gov.kh/api/authcenter/authentication/login",
+        //   {
+        //     email: email.value,
+        //     password: password.value
+        //   }
+        // )
 
-        if (userId === "2901") {
-          router.push("/pdf/flow-dash2")
-        } else {
-          router.push("/dashboard")
-        }
+        
+
+        /**
+         * End
+         */
+
       } catch (err) {
         const apiMessage =
           err.response?.data?.message ||
