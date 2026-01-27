@@ -1,7 +1,7 @@
 <template>
-  <Header title="លំហូរឯកសារទីស្តីការគណៈរដ្ឋមន្ត្រី" />
+  <Header title="លំហូរឯកសារទីស្តីការគណៈរដ្ឋមន្ត្រី"/>
   <section class="appppw">
-  <Aside />
+  <Aside/>
   <div class="sw">
 				<div class="app_content">
 				<div class="ocm_cwr">
@@ -167,11 +167,11 @@
     
     </div>
   </div>
-  <Footer />
+  <Footer/>
 </div>
 </section>
 </template>
-<script setup>
+<script>
 // import { API_BASE_URL, formatKhmerNumber, formatDateKhmer  } from '@/utils.js'
 import Header from '@/components/Header.vue'
 import Aside from '@/components/Aside.vue'
@@ -179,15 +179,23 @@ import Footer from '@/components/Footer.vue'
 import { InputSelect } from '@/components/ui/inputselect'
 import { leaders } from '@/data/leader.js'
 import { FlatPickr } from '@/components/ui/flat-pickr'
-</script>
-<script>
+import { onMounted , reactive ,ref } from 'vue'
+import { useStore } from 'vuex'
 export default {
   components: {
-    InputSelect
+    InputSelect ,
+    Header ,
+    Footer ,
+    Aside 
   },
-  data() {
-    return {
-      form: {
+  setup(){
+
+  
+    /**
+     * ប្រកាសអថេរ - Declaration Variables
+     */
+    const store = useStore()
+    const form = reactive({
         title: "",
         uid: null,
         description: "",
@@ -197,182 +205,178 @@ export default {
         ministry: null,
         signature: null,
         startDate : new Date()
-      },
-      leaders: leaders,
-      selectedLeader: 0 ,
-      departments: [
-        { value: "2", label: "អគ្គនាយកដ្ឋានសម្របសម្រួលកិច្ចការទូទៅ" },
-        { value: "3", label: "ក្រុមប្រឹក្សាអ្នកច្បាប់" },
-        { value: "4", label: "អង្គភាពព័ត៌មាននិងប្រតិកម្មរហ័ស" },
-        { value: "5", label: "យេនឌ័រ​នៃទីស្តីការគណៈរដ្ឋមន្រ្តី" },
-        { value: "6", label: "អជ្ញាធរកម្ពុជា គ្រប់គ្រងសកម្មភាពកំចាត់មីន និងសង្គ្រោះជនពិការដោយសារមីន" },
-        { value: "7", label: "គណៈកម្មាធិការជាតិគ្រប់គ្រងគ្រោះមហន្តរាយ" },
-        { value: "8", label: "អគ្គលេខាធិការដ្ឋាននៃវេទិកាសម្ព័ន្ធសង្គមស៊ីវិល" },
-        { value: "9", label: "ក្រុមប្រឹក្សាសេដ្ឋកិច្ច សង្គមកិច្ច និងវប្បធម៌ (ក.ស.វ.)" },
-        { value: "10", label: "រាជបណ្ឌិត្យសភាកម្ពុជា" },
-        { value: "11", label: "គណៈកម្មាធិការជាតិជំរុញចលនា ភូមិ១ ផលិតផល១ (គ.ជ.ភ១.ផ១.)" },
-        { value: "12", label: "គណៈកម្មាធិការសិទ្ធិមនុស្សកម្ពុជា" },
-        { value: "13", label: "អាជ្ញាធរជាតិទទួលបន្ទុកកិច្ចការព្រំដែន" },
-      ],
-      selectedDeparetment: 0 ,
-      // documentTypes: [
-      //   { value: "2", label: "ព្រះរាជក្រម" },
-      //   { value: "3", label: "ព្រះរាជក្រឹត្យ.បក" },
-      //   { value: "4", label: "អនុក្រឹត្យ.បក" },
-      //   { value: "5", label: "ស.ជ.ណ" },
-      //   { value: "6", label: "សេចក្ដីសម្រេច" },
-      //   { value: "7", label: "សារាចរ និង សារាចរណែនាំ" },
-      //   { value: "8", label: "ប្រកាស" },
-      //   { value: "9", label: "គោលនយោបាយជាតិ" },
-      //   { value: "10", label: "ផែនការយុទ្ធសាស្ត្រ" },
-      //   { value: "11", label: "បទបញ្ជារាជរដ្ឋាភិបាល" },
-      //   { value: "12", label: "ផែនការសកម្មភាពក្រសួងនានា" },
-      //   { value: "13", label: "អនុក្រឹត្យ.តត" },
-      //   { value: "14", label: "ព្រះរាជក្រឹត្យ.តត" },
-      // ],
+      })
+      
+    const leaders = ref([])
+    const selectedLeader = ref(null) 
+    const departments = ref([
+      { value: "2", label: "អគ្គនាយកដ្ឋានសម្របសម្រួលកិច្ចការទូទៅ" },
+      { value: "3", label: "ក្រុមប្រឹក្សាអ្នកច្បាប់" },
+      { value: "4", label: "អង្គភាពព័ត៌មាននិងប្រតិកម្មរហ័ស" },
+      { value: "5", label: "យេនឌ័រ​នៃទីស្តីការគណៈរដ្ឋមន្រ្តី" },
+      { value: "6", label: "អជ្ញាធរកម្ពុជា គ្រប់គ្រងសកម្មភាពកំចាត់មីន និងសង្គ្រោះជនពិការដោយសារមីន" },
+      { value: "7", label: "គណៈកម្មាធិការជាតិគ្រប់គ្រងគ្រោះមហន្តរាយ" },
+      { value: "8", label: "អគ្គលេខាធិការដ្ឋាននៃវេទិកាសម្ព័ន្ធសង្គមស៊ីវិល" },
+      { value: "9", label: "ក្រុមប្រឹក្សាសេដ្ឋកិច្ច សង្គមកិច្ច និងវប្បធម៌ (ក.ស.វ.)" },
+      { value: "10", label: "រាជបណ្ឌិត្យសភាកម្ពុជា" },
+      { value: "11", label: "គណៈកម្មាធិការជាតិជំរុញចលនា ភូមិ១ ផលិតផល១ (គ.ជ.ភ១.ផ១.)" },
+      { value: "12", label: "គណៈកម្មាធិការសិទ្ធិមនុស្សកម្ពុជា" },
+      { value: "13", label: "អាជ្ញាធរជាតិទទួលបន្ទុកកិច្ចការព្រំដែន" },
+    ])
+    
+    const selectedDeparetment = ref(null)
+    // const documentTypes = ref([
+    //   { value: "2", label: "ព្រះរាជក្រម" },
+    //   { value: "3", label: "ព្រះរាជក្រឹត្យ.បក" },
+    //   { value: "4", label: "អនុក្រឹត្យ.បក" },
+    //   { value: "5", label: "ស.ជ.ណ" },
+    //   { value: "6", label: "សេចក្ដីសម្រេច" },
+    //   { value: "7", label: "សារាចរ និង សារាចរណែនាំ" },
+    //   { value: "8", label: "ប្រកាស" },
+    //   { value: "9", label: "គោលនយោបាយជាតិ" },
+    //   { value: "10", label: "ផែនការយុទ្ធសាស្ត្រ" },
+    //   { value: "11", label: "បទបញ្ជារាជរដ្ឋាភិបាល" },
+    //   { value: "12", label: "ផែនការសកម្មភាពក្រសួងនានា" },
+    //   { value: "13", label: "អនុក្រឹត្យ.តត" },
+    //   { value: "14", label: "ព្រះរាជក្រឹត្យ.តត" },
+    // ])
 
-      documentTypes: [       
-        { value: "1", label: "របាយការណ៍" },
-        { value: "2", label: "សំណើរ" },
-      ],
+    const documentTypes = ref([       
+      { value: "1", label: "របាយការណ៍" },
+      { value: "2", label: "សំណើរ" },
+    ])
 
 
-      ministries: [
-        { value: "2", label: "ទីស្តីការគណៈរដ្ឋមន្ត្រី" },
-        { value: "3", label: "ក្រសួង មហាផ្ទៃ" },
-        { value: "4", label: "ក្រសួង គមនាគមន៏" },
-        { value: "5", label: "ក្រសួង ពាណិជ្ជកម្ម" },
-        { value: "6", label: "ក្រសួង​ កសិកម្ម​ ​​រុក្ខាប្រមាញ់​និងនេសាទ" },
-        { value: "7", label: "ក្រសួង ព័ត៌មាន" },
-        { value: "8", label: "ក្រសួង អភិវឌ្ឍន៏ជនបទ" },
-        { value: "9", label: "ក្រសួង ទេសចរណ៍" },
-        { value: "10", label: "ក្រសួង ការពារជាតិ" },
-        { value: "11", label: "ក្រសួង បរិស្ថាន" },
-        { value: "12", label: "ក្រសួង អប់រំយុវជន​និងកីឡា" },
-        { value: "13", label: "ក្រសួង ការបរទេស និងសហប្រតិបត្តិការអន្តរជាតិ" },
-        { value: "15", label: "រដ្ឋលេខាធិការដ្ឋានអាកាសចរណ៏ស៊ីវីល" },
-        { value: "16", label: "សមាគម កាកបាទក្រហមកម្ពុជា" },
-        { value: "17", label: "ក្រុមហ៊ុន អគ្គីសនីកម្ពុជា" },
-        { value: "18", label: "គ្រប់​ បណ្តា អង្គការ-សមាគម ស្រុក និងក្រៅប្រទេស" },
-        { value: "19", label: "អាជ្ញាធរជាតិ ទទួលបន្ទុកកិច្ចការ ICT" },
-        { value: "20", label: "អាជ្ញាធរ អប្សារា" },
-        { value: "21", label: "អាជ្ញាធរ មីន" },
-        { value: "22", label: "អាជ្ញាធរ ទេសចរណ៍" },
-        { value: "23", label: "អាជ្ញាធរ សវនកម្មជាតិ" },
-        { value: "24", label: "អាជ្ញាធរជាតិប្រយុទ្ធនឹងជំងឺអេដស៍" },
-        { value: "25", label: "អាជ្ញាធរ ព្រំដែន" },
-        { value: "26", label: "អាជ្ញាធរ ប្រឆាំងគ្រឿងញៀន" },
-        { value: "27", label: "ធនាគារជាតិ កម្ពុជា" },
-        { value: "28", label: "ធនាគារ អភិវឌ្ឍន៍ជនបទ" },
-        { value: "29", label: "រដ្ឋលេខាធិការ មុខងារសាធារណៈ" },
-        { value: "30", label: "រាជបណ្ឌិតសភា កម្ពុជា" },
-        { value: "31", label: "សាលា ភូមិន្ទរដ្ឋបាល" },
-        { value: "32", label: "ស្ថានទូត" },
-        { value: "33", label: "គ្រប់បណ្តា ខេត្ត-ក្រុង នៅទូទាំងប្រទេស" },
-        { value: "34", label: "ក្រសួង សេដ្ឋកិច្ច និងហិរញ្ញវត្ថុ" },
-        { value: "35", label: "ក្រសួង​ វប្បធម៌ និងវិចិត្រសិល្បៈ" },
-        { value: "36", label: "ក្រសួង សុខាភិបាល" },
-        { value: "37", label: "ក្រសួង ឧស្សាហកម្ម រ៉ែ និងថាមពល" },
-        { value: "38", label: "ក្រសួង​ យុត្តិធម៌" },
-        { value: "39", label: "ក្រសួង ការងារ និងបណ្តុះបណ្តាលវិជ្ជាជីវៈ" },
-        { value: "40", label: "ក្រសួង រៀបចំដែនដី នគរូបនីយកម្ម និងសំណង់" },
-        { value: "41", label: "ក្រសួង ទំនាក់ទំនងសភា ព្រឹទ្ធសភា និងអធិការកិច្ច" },
-        { value: "42", label: "ក្រសួង ផែនការ" },
-        { value: "43", label: "ក្រសួង ប្រៃណីយ៍ និងទូរគមនាគមន៍" },
-        { value: "44", label: "ក្រសួង សាធារណៈការ និងដឹកជញ្ជូន" },
-        { value: "45", label: "ក្រសួង ធម្មការ និងសាសនា" },
-        { value: "46", label: "ក្រសួង សង្គមកិច្ច អតីតយុទ្ធជន និងយុវនីតិសម្បទា" },
-        { value: "47", label: "ក្រសួង ធនធានទឹក និងឧតុនិយម" },
-        { value: "48", label: "ក្រសួង កិច្ចការនារី" },
-        { value: "49", label: "ក្រសួង ព្រះបរមរាជវាំង" },
-        { value: "50", label: "គ្រប់បណ្តា ក្រសួង-ស្ថាបន័ ពាក់ព័ន្ធ" },
-        { value: "51", label: "ក្រុមប្រឹក្សាជាតិ ដើម្បីកុមារ" },
-        { value: "52", label: "ក្រុមប្រឹក្សា អភិវឌ្ឍន៍កម្ពុជា" },
-        { value: "53", label: "ក្រុមប្រឹក្សាកំណែរទម្រង់រដ្ឋបាល" },
-        { value: "54", label: "ក្រុមប្រឹក្សា អ្នកច្បាប់" },
-        { value: "55", label: "ក្រុមប្រឹក្សា ស្តារ អភិវឌ្ឍន៍វិស័យកសិកម្ម និងជនបទ" },
-        { value: "56", label: "ក្រុមប្រឹក្សា ធម្មនុញ្ញ" },
-        { value: "57", label: "ក្រុមប្រឹក្សា កំណែទម្រង់ច្បាប់ និងប្រពន័្ធយុត្តិធម៌" },
-        { value: "58", label: "គណៈកម្មការជាតិ គ្រប់គ្រង គ្រោះមហន្តរាយ" },
-        { value: "59", label: "គណៈកម្មការជាតិ ទន្លេមេគង្គ កម្ពុជា" },
-        { value: "60", label: "គណៈកម្មការជាតិ យូណេស្កូ" },
-        { value: "61", label: "គណៈកម្មការ​ រៀបចំបុណ្យជាតិ-អន្តរជាតិ" },
-        { value: "62", label: "គណៈកម្មការ​ សិទ្ធិមនុស្ស កម្ពុជា" },
-        { value: "63", label: "ព្រឹទ្ធសភា" },
-        { value: "64", label: "រដ្ឋសភា​​​​​​​​​​​​ជាតិ" },
-      ],
-      selectedMinistry: 0 ,
-      previewImages: [],
-      selectedFiles: [],
-      isSubmitting: false,
-      submitted: false,
-    };
-  },
-  created() {
+    const ministries = ref([
+      { value: "2", label: "ទីស្តីការគណៈរដ្ឋមន្ត្រី" },
+      { value: "3", label: "ក្រសួង មហាផ្ទៃ" },
+      { value: "4", label: "ក្រសួង គមនាគមន៏" },
+      { value: "5", label: "ក្រសួង ពាណិជ្ជកម្ម" },
+      { value: "6", label: "ក្រសួង​ កសិកម្ម​ ​​រុក្ខាប្រមាញ់​និងនេសាទ" },
+      { value: "7", label: "ក្រសួង ព័ត៌មាន" },
+      { value: "8", label: "ក្រសួង អភិវឌ្ឍន៏ជនបទ" },
+      { value: "9", label: "ក្រសួង ទេសចរណ៍" },
+      { value: "10", label: "ក្រសួង ការពារជាតិ" },
+      { value: "11", label: "ក្រសួង បរិស្ថាន" },
+      { value: "12", label: "ក្រសួង អប់រំយុវជន​និងកីឡា" },
+      { value: "13", label: "ក្រសួង ការបរទេស និងសហប្រតិបត្តិការអន្តរជាតិ" },
+      { value: "15", label: "រដ្ឋលេខាធិការដ្ឋានអាកាសចរណ៏ស៊ីវីល" },
+      { value: "16", label: "សមាគម កាកបាទក្រហមកម្ពុជា" },
+      { value: "17", label: "ក្រុមហ៊ុន អគ្គីសនីកម្ពុជា" },
+      { value: "18", label: "គ្រប់​ បណ្តា អង្គការ-សមាគម ស្រុក និងក្រៅប្រទេស" },
+      { value: "19", label: "អាជ្ញាធរជាតិ ទទួលបន្ទុកកិច្ចការ ICT" },
+      { value: "20", label: "អាជ្ញាធរ អប្សារា" },
+      { value: "21", label: "អាជ្ញាធរ មីន" },
+      { value: "22", label: "អាជ្ញាធរ ទេសចរណ៍" },
+      { value: "23", label: "អាជ្ញាធរ សវនកម្មជាតិ" },
+      { value: "24", label: "អាជ្ញាធរជាតិប្រយុទ្ធនឹងជំងឺអេដស៍" },
+      { value: "25", label: "អាជ្ញាធរ ព្រំដែន" },
+      { value: "26", label: "អាជ្ញាធរ ប្រឆាំងគ្រឿងញៀន" },
+      { value: "27", label: "ធនាគារជាតិ កម្ពុជា" },
+      { value: "28", label: "ធនាគារ អភិវឌ្ឍន៍ជនបទ" },
+      { value: "29", label: "រដ្ឋលេខាធិការ មុខងារសាធារណៈ" },
+      { value: "30", label: "រាជបណ្ឌិតសភា កម្ពុជា" },
+      { value: "31", label: "សាលា ភូមិន្ទរដ្ឋបាល" },
+      { value: "32", label: "ស្ថានទូត" },
+      { value: "33", label: "គ្រប់បណ្តា ខេត្ត-ក្រុង នៅទូទាំងប្រទេស" },
+      { value: "34", label: "ក្រសួង សេដ្ឋកិច្ច និងហិរញ្ញវត្ថុ" },
+      { value: "35", label: "ក្រសួង​ វប្បធម៌ និងវិចិត្រសិល្បៈ" },
+      { value: "36", label: "ក្រសួង សុខាភិបាល" },
+      { value: "37", label: "ក្រសួង ឧស្សាហកម្ម រ៉ែ និងថាមពល" },
+      { value: "38", label: "ក្រសួង​ យុត្តិធម៌" },
+      { value: "39", label: "ក្រសួង ការងារ និងបណ្តុះបណ្តាលវិជ្ជាជីវៈ" },
+      { value: "40", label: "ក្រសួង រៀបចំដែនដី នគរូបនីយកម្ម និងសំណង់" },
+      { value: "41", label: "ក្រសួង ទំនាក់ទំនងសភា ព្រឹទ្ធសភា និងអធិការកិច្ច" },
+      { value: "42", label: "ក្រសួង ផែនការ" },
+      { value: "43", label: "ក្រសួង ប្រៃណីយ៍ និងទូរគមនាគមន៍" },
+      { value: "44", label: "ក្រសួង សាធារណៈការ និងដឹកជញ្ជូន" },
+      { value: "45", label: "ក្រសួង ធម្មការ និងសាសនា" },
+      { value: "46", label: "ក្រសួង សង្គមកិច្ច អតីតយុទ្ធជន និងយុវនីតិសម្បទា" },
+      { value: "47", label: "ក្រសួង ធនធានទឹក និងឧតុនិយម" },
+      { value: "48", label: "ក្រសួង កិច្ចការនារី" },
+      { value: "49", label: "ក្រសួង ព្រះបរមរាជវាំង" },
+      { value: "50", label: "គ្រប់បណ្តា ក្រសួង-ស្ថាបន័ ពាក់ព័ន្ធ" },
+      { value: "51", label: "ក្រុមប្រឹក្សាជាតិ ដើម្បីកុមារ" },
+      { value: "52", label: "ក្រុមប្រឹក្សា អភិវឌ្ឍន៍កម្ពុជា" },
+      { value: "53", label: "ក្រុមប្រឹក្សាកំណែរទម្រង់រដ្ឋបាល" },
+      { value: "54", label: "ក្រុមប្រឹក្សា អ្នកច្បាប់" },
+      { value: "55", label: "ក្រុមប្រឹក្សា ស្តារ អភិវឌ្ឍន៍វិស័យកសិកម្ម និងជនបទ" },
+      { value: "56", label: "ក្រុមប្រឹក្សា ធម្មនុញ្ញ" },
+      { value: "57", label: "ក្រុមប្រឹក្សា កំណែទម្រង់ច្បាប់ និងប្រពន័្ធយុត្តិធម៌" },
+      { value: "58", label: "គណៈកម្មការជាតិ គ្រប់គ្រង គ្រោះមហន្តរាយ" },
+      { value: "59", label: "គណៈកម្មការជាតិ ទន្លេមេគង្គ កម្ពុជា" },
+      { value: "60", label: "គណៈកម្មការជាតិ យូណេស្កូ" },
+      { value: "61", label: "គណៈកម្មការ​ រៀបចំបុណ្យជាតិ-អន្តរជាតិ" },
+      { value: "62", label: "គណៈកម្មការ​ សិទ្ធិមនុស្ស កម្ពុជា" },
+      { value: "63", label: "ព្រឹទ្ធសភា" },
+      { value: "64", label: "រដ្ឋសភា​​​​​​​​​​​​ជាតិ" },
+    ])
+
+    /**
+     * Check authentication
+     */
     const user = JSON.parse(localStorage.getItem("user"));
     if (user && user.id) {
-      this.form.uid = user.id;
+      form.uid = user.id;
     } else {
       console.error("User not found in localStorage");
     }
-  },
-  mounted() {
-    this.readChildsOrganization(2);
-    this.readMinistries(1);
-    this.getLeaders();
-  },
-  methods: {
-    readChildsOrganization(){
-      this.$store.dispatch('organization/listByParent',{
+
+
+    /**
+     * ប្រកាស់មុខងារ - Declaration of functions
+     */
+    function readChildsOrganization(){
+      store.dispatch('organization/listByParent',{
         search: '' ,
         perPage: 1000 ,
         page: 1 ,
         id: 2 // Parent Organization ID
       }).then( res => {
-        this.departments = res.data.records.map( (r) => { return { value: r.id , label: r.name }; } )
+        departments.value = res.data.records.map( (r) => { return { value: r.id , label: r.name }; } )
       }).catch( error => {
         console.error( 'កំហុស៖ ', error)
       })
-    },
-    readMinistries(){
-      this.$store.dispatch('organization/listByParent',{
+    }
+    function readMinistries(){
+      store.dispatch('organization/listByParent',{
         search: '' ,
         perPage: 1000 ,
         page: 1 ,
         id: 1 // Parent Organization ID
       }).then( res => {
-        this.ministries = res.data.records.map( (r) => { return { value: r.id , label: r.name }; } )
+        ministries.value = res.data.records.map( (r) => { return { value: r.id , label: r.name }; } )
       }).catch( error => {
         console.error( 'កំហុស៖ ', error)
       })
-    },
-    getLeaders(){
-      this.$store.dispatch('officer/list',{
+    }
+    function getLeaders(){
+      store.dispatch('officer/list',{
         search: '' ,
         perPage: 1000 ,
         page: 1 ,
       }).then(res => {
-        this.leaders = res.data.records
+        leaders = res.data.records
       }).catch( error => {
         console.log( 'កំហុស៖' , error )
       })
-    },
-    handleInput(){
+    }
+    function handleInput(){
 
-    },
-    handleDrop(event) {
+    }
+    function handleDrop(event) {
       event.preventDefault();
       const files = event.dataTransfer.files;
-      this.processFiles(files);
-    },
-    handleFileUpload(event) {
+      processFiles(files);
+    }
+    function handleFileUpload(event) {
       const files = event.target.files;
-      this.processFiles(files);
-    },
-    selectFiles() {
+      processFiles(files);
+    }
+    function selectFiles() {
       this.$refs.fileInput.click();
-    },
-    processFiles(files) {
+    }
+    function processFiles(files) {
       for (const file of files) {
         if (file.type.startsWith("image/")) {
           const reader = new FileReader();
@@ -383,9 +387,10 @@ export default {
           this.selectedFiles.push(file);
         }
       }
-    },
-    async submitForm() {
-      this.isSubmitting = true; // Disable the button
+    }
+
+    function submitForm() {
+      isSubmitting = true; // Disable the button
 
       // // Save the data 
       // this.$store.dispatch('document/create',{
@@ -439,15 +444,14 @@ export default {
       }
 
       this.isSubmitting = false; // Re-enable button (if needed)
-    },
-  },
-  setup(){
+    }
+
     /**
      * Upload functions
      */
     /**
-      * File upload
-      */
+     * File upload
+     */
     const pdfs = ref([])
     /**
       * On change
@@ -559,7 +563,30 @@ export default {
     }
     // End Upload
 
+    /**
+     * ការហៅមុខងារ ដែលគួរត្រូវដំណើរការពេលទំព័របានផ្ទុករួចរាល់​ - Call functions on mounted
+     */
+    onMounted( () => {
+      readChildsOrganization(2)
+      readMinistries(1)
+      getLeaders()
+    })
+    
+    /**
+     * ការបោះត្រឡប់ អថេរ និងមុខងារ ទៅកាន់ Template
+     */
     return {
+      form ,
+      departments , 
+      ministries , 
+      documentTypes ,
+      leaders ,
+      selectedDepepartment : 0 ,
+      selectedMinistry: 0 ,
+      previewImages: [],
+      selectedFiles: [],
+      isSubmitting: false,
+      submitted: false,
       clickUpload ,
       fileChange ,
       uploadFiles
