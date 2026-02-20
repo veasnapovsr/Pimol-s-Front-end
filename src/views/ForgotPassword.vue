@@ -33,7 +33,7 @@
         <div><br></div>
       </form>
         <!-- Show VerifyCode page/component after request -->
-        <div v-if="showVerifyCode" class="mt-6">
+        <!-- <div v-if="showVerifyCode" class="mt-6">
           <input
             id="otp"
             class="input form-control text-center tracking-widest text-lg"
@@ -48,7 +48,27 @@
           <br>
           <button class="button button-primary button-large w-full mt-2" @click="handleVerifyOtp">ផ្ញើលេខកូដ</button>
           <div v-if="otpMessage" class="mt-2 text-center text-red-600">{{ otpMessage }}</div>
+        </div> -->
+      <!-- OTP Modal Popup -->
+      <div v-if="showVerifyCode" class="fixed inset-0 z-50 flex items-center justify-center" style="background: rgba(0,0,0,0.2);">
+        <div class="bg-white rounded-lg shadow-lg p-8 relative w-full max-w-xs flex flex-col items-center">
+          <button @click="closeOtpModal" class="absolute top-2 right-2 text-gray-400 hover:text-red-500 text-xl font-bold">×</button>
+          <div class="mb-4 text-center font-semibold">បញ្ចូលលេខកូដ ៦ ខ្ទង់</div>
+          <input
+            id="otp"
+            class="input form-control text-center tracking-widest text-lg mb-2"
+            v-model="otp"
+            type="text"
+            maxlength="6"
+            pattern="[0-9]{6}"
+            autocomplete="one-time-code"
+            placeholder="------"
+            required
+          />
+          <button class="button button-primary button-large w-full mt-2" @click="handleVerifyOtp">ផ្ញើលេខកូដ</button>
+          <div v-if="otpMessage" class="mt-2 text-center text-red-600">{{ otpMessage }}</div>
         </div>
+      </div>
       <div v-if="message" class="mt-4 text-green-600 text-center">{{ message }}</div>
       <div class="mt-4 text-right hover:underline">
         <router-link to="/login" class="text-blue-500 hover:underline">ត្រឡប់ទៅទំព័រចូល</router-link>
@@ -104,6 +124,11 @@ export default {
       }
       otpMessage.value = "កូដត្រឹមត្រូវ"
     }
+      const closeOtpModal = () => {
+        showVerifyCode.value = false
+        otp.value = ""
+        otpMessage.value = ""
+      }
 
     const handleRequestReset = () => {
       // Instantly show VerifyCode below, no backend check
@@ -117,7 +142,8 @@ export default {
       showVerifyCode,
       otp,
       otpMessage,
-      handleVerifyOtp
+      handleVerifyOtp,
+        closeOtpModal
     }
   }
 }
