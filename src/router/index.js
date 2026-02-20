@@ -7,6 +7,9 @@ import SidebarLayout from '../components/SidebarLayout.vue'
 
 // Views
 import Login from '../views/Login.vue'
+import ForgotPassword from '../views/ForgotPassword.vue'
+import VerifyCode from '../views/VerifyCode.vue'
+import ResetPassword from '../views/ResetPassword.vue'
 import Dashboard from '../views/Dashboard.vue'
 import Attendance from '../views/Attendance.vue'
 // shedcn
@@ -40,6 +43,7 @@ import Online from '@/components/OnlineUserList.vue'
 ----------------------------------- */
 const routes = [
   //  AUTH (PUBLIC)
+
   {
     path: '/login',
     component: AuthLayout,
@@ -48,6 +52,21 @@ const routes = [
         path: '',
         name: 'login',
         component: Login
+      },
+      {
+        path: '/forgot-password',
+        name: 'forgot-password',
+        component: ForgotPassword
+      },
+      {
+        path: '/verify-code',
+        name: 'verify-code',
+        component: VerifyCode
+      },
+      {
+        path: '/reset-password',
+        name: 'reset-password',
+        component: ResetPassword
       }
     ]
   },
