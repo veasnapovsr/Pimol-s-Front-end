@@ -30,6 +30,14 @@
         <button type="submit" class="button button-primary button-large w-full mt-2">
           ស្នើសុំលេខកូដ 
         </button>
+       <!-- Small Button/align-center
+
+         <!-- <div class="flex justify-center w-full">
+          <button type="submit" class="button button-primary">
+            ស្នើសុំលេខកូដ
+          </button>
+        </div> -->
+
         <div><br></div>
       </form>
         <!-- Show VerifyCode page/component after request -->
@@ -54,18 +62,21 @@
         <div class="bg-white rounded-lg shadow-lg p-8 relative w-full max-w-xs flex flex-col items-center">
           <button @click="closeOtpModal" class="absolute top-2 right-2 text-gray-400 hover:text-red-500 text-xl font-bold">×</button>
           <div class="mb-4 text-center font-semibold">បញ្ចូលលេខកូដ ៦ ខ្ទង់</div>
+          <br>
           <input
             id="otp"
-            class="input form-control text-center tracking-widest text-lg mb-2"
+            class="input form-control text-lg mb-4"
             v-model="otp"
             type="text"
             maxlength="6"
             pattern="[0-9]{6}"
             autocomplete="one-time-code"
-            placeholder="------"
+            placeholder="xxxxxx"
             required
+            style="text-align: center;"
           />
-          <button class="button button-primary button-large w-full mt-2" @click="handleVerifyOtp">ផ្ញើលេខកូដ</button>
+          <br>
+          <button class="button button-primary " @click="handleVerifyOtp">ផ្ញើលេខកូដ</button>
           <div v-if="otpMessage" class="mt-2 text-center text-red-600">{{ otpMessage }}</div>
         </div>
       </div>
@@ -151,4 +162,7 @@ export default {
 
 
 <style scoped>
+#otp::placeholder {
+  padding-right: 14px;
+}
 </style>
